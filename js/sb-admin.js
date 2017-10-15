@@ -42,4 +42,22 @@
     }, 1000, 'easeInOutExpo');
     event.preventDefault();
   });
+  	var $contextMenu = $("#contextMenu");
+	$("body").on("contextmenu", "table tr", function(e) {
+		var tr =$(this);
+		$(".table-active").removeClass("table-active");
+		tr.addClass("table-active");
+		$contextMenu.css({
+	      display: "block",
+	      left: e.pageX,
+	      top: e.pageY
+		});
+		$contextMenu.find("a").each(function() {
+			var action = $(this).data("action");
+			$(this).attr('href', tr.data(action));			
+		});
+		  
+		return false;
+	});      
+
 })(jQuery); // End of use strict
